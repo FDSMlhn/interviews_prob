@@ -1,0 +1,27 @@
+Overall, I use 4 models and take mean ensemble as the final submission:
+
+1. Xgboost
+5-cv: auc-0.791
+
+2. Lightgbm
+5-cv: auc-0.7905
+
+3. Neural network(Topology 36-2048-1024-512-2) and ReLU as activation, batchnorm, 0.8 dropout.
+5-cv: auc-0.794
+
+4. Denoising Autoencoder(Topology 36-1000-1000-1000-36) + Neural network(1000-2048-1024-512-2) and ReLU as activation, batchnorm, 0.8 dropout.
+The noise I am using here is called swap noise: At some probability p(I use 0.15), you swap the feature with that of other columns.
+5-cv:
+
+
+The ensemble has 5-cv 0.79 on the training set.
+
+
+
+The basic finding of the analysis:
+
+1. The top 3 variables that influence the choice is Price > Review > Pic quality > Beds. Price is dominating one without doubt.
+
+2. Surprisingly whether it's just a room or apartment doesnt matter at all. Maybe because it's somewhat incoporated in the variables like price and beds.
+
+3. The dataset is somewhat noisy. The DAE is effective to deal with this. Better data engineer to cope with this noise can furthur improve the result.
